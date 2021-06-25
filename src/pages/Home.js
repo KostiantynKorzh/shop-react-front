@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import * as Constants from "../utils/Constants"
 
-export const Home = () => {
+const Home = () => {
     return (
         <>
             Home
@@ -24,3 +24,5 @@ export const Home = () => {
         </>
     );
 };
+
+export default Home;

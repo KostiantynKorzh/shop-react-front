@@ -1,9 +1,11 @@
 import React from 'react';
 
-export const Contacts = () => {
+const Contacts = () => {
     return (
         <>
             Contacts
         </>
     );
 };
+
+export default Contacts;
