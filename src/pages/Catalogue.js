@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import CatalogueService from "../services/CatalogueService";
-import {Button, List, ListItem, TextField} from "@material-ui/core";
+import {Button, Grid, TextField, Typography} from "@material-ui/core";
+import ItemCard from "../components/catalogue/ItemCard";
 
 const Catalogue = () => {
 
@@ -22,12 +23,16 @@ const Catalogue = () => {
 
     return (
         <>
-            Catalogue
-            <List>
+            <Typography variant="h1" gutterBottom>
+                Catalogue
+            </Typography>
+            <Grid container spacing={3}>
                 {items.map(item => (
-                    <ListItem>{item.title} : {item.price}</ListItem>
+                    <Grid item xs={12} md={6} lg={4}>
+                        <ItemCard title={item.title} price={item.price}/>
+                    </Grid>
                 ))}
-            </List>
+            </Grid>
             <form>
                 <div>
                     <TextField
