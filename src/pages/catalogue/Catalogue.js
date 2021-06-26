@@ -1,14 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import CatalogueService from "../services/CatalogueService";
+import CatalogueService from "../../services/CatalogueService";
 import {Button, Grid, TextField, Typography} from "@material-ui/core";
-import ItemCard from "../components/catalogue/ItemCard";
+import ItemCard from "../../components/catalogue/ItemCard";
 
-const Catalogue = () => {
+const Catalogue = (props) => {
 
     const [items, setItems] = useState([]);
 
     const [newTitle, setNewTitle] = useState('');
     const [newPrice, setNewPrice] = useState('');
+    const [newImage, setNewImage] = useState('');
 
     const fetchItems = () => {
         CatalogueService.getAllItems()
@@ -29,7 +30,9 @@ const Catalogue = () => {
             <Grid container spacing={3}>
                 {items.map(item => (
                     <Grid item xs={12} md={6} lg={4}>
-                        <ItemCard title={item.title} price={item.price}/>
+                        <ItemCard
+                            {...props}
+                            item={item}/>
                     </Grid>
                 ))}
             </Grid>
@@ -48,12 +51,20 @@ const Catalogue = () => {
                         onChange={e => setNewPrice(e.target.value)}>
                     </TextField>
                 </div>
+                <div>
+                    <TextField
+                        label={"Image path"}
+                        value={newImage}
+                        onChange={e => setNewImage(e.target.value)}>
+                    </TextField>
+                </div>
                 <Button variant="contained" color="primary"
                         onClick={() => {
-                            CatalogueService.createNewItem(newTitle, newPrice)
+                            CatalogueService.createNewItem(newTitle, newPrice, newImage)
                                 .then(() => fetchItems());
                             setNewTitle('');
-                            setNewPrice(0);
+                            setNewPrice('');
+                            setNewImage('')
                         }}>
                     Submit
                 </Button>
