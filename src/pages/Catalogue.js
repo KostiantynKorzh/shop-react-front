@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import CatalogueService from "../services/CatalogueService";
+import {Button, List, ListItem, TextField} from "@material-ui/core";
 
 const Catalogue = () => {
 
     const [items, setItems] = useState([]);
 
     const [newTitle, setNewTitle] = useState('');
-    const [newPrice, setNewPrice] = useState(0);
+    const [newPrice, setNewPrice] = useState('');
 
     const fetchItems = () => {
         CatalogueService.getAllItems()
@@ -22,26 +23,35 @@ const Catalogue = () => {
     return (
         <>
             Catalogue
-            <ul>
+            <List>
                 {items.map(item => (
-                    <li>{item.title} : {item.price}</li>
+                    <ListItem>{item.title} : {item.price}</ListItem>
                 ))}
-            </ul>
+            </List>
             <form>
-                <label>
-                    Title:
-                    <input type="text" value={newTitle} onChange={e => setNewTitle(e.target.value)}/>
-                </label>
-                <label>
-                    Price:
-                    <input type="text" value={newPrice} onChange={e => setNewPrice(e.target.value)}/>
-                </label>
-                <input type="button" onClick={() => {
-                    CatalogueService.createNewItem(newTitle, newPrice)
-                        .then(() => fetchItems());
-                    setNewTitle('');
-                    setNewPrice(0);
-                }}/>
+                <div>
+                    <TextField
+                        label={"Title"}
+                        value={newTitle}
+                        onChange={e => setNewTitle(e.target.value)}>
+                    </TextField>
+                </div>
+                <div>
+                    <TextField
+                        label={"Price"}
+                        value={newPrice}
+                        onChange={e => setNewPrice(e.target.value)}>
+                    </TextField>
+                </div>
+                <Button variant="contained" color="primary"
+                        onClick={() => {
+                            CatalogueService.createNewItem(newTitle, newPrice)
+                                .then(() => fetchItems());
+                            setNewTitle('');
+                            setNewPrice(0);
+                        }}>
+                    Submit
+                </Button>
             </form>
         </>
     );
