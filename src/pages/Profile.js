@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import UserService from "../services/UserService";
+import UserDefaultLayout from "./layouts/UserDefaultLayout";
 
 const Profile = () => {
 
@@ -28,10 +29,12 @@ const Profile = () => {
 
     return (
         <>
-            User: {user.username} with id {user.id}
-            <ul>
-                {users.map((user) => <li>{user.username}</li>)}
-            </ul>
+            <UserDefaultLayout>
+                User: {user.username} with id {user.id}
+                <ul>
+                    {users.map((user) => <li>{user.username}</li>)}
+                </ul>
+            </UserDefaultLayout>
         </>
     );
 };

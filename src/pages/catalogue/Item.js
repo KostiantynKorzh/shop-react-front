@@ -1,9 +1,12 @@
 import React from 'react';
+import UserDefaultLayout from "../layouts/UserDefaultLayout";
 
 const Item = (props) => {
     return (
         <>
-            Item with id: {props.match.params.id}
+            <UserDefaultLayout>
+                Item with id: {props.match.params.id}
+            </UserDefaultLayout>
         </>
     );
 };

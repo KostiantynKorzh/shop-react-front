@@ -1,9 +1,12 @@
 import React from 'react';
+import AdminDefaultLayout from "./layouts/AdminDefaultLayout";
 
 const Admin = () => {
     return (
         <>
-            Admin
+            <AdminDefaultLayout>
+                Admin
+            </AdminDefaultLayout>
         </>
     );
 };

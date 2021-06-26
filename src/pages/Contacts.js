@@ -1,9 +1,14 @@
 import React from 'react';
+import FeedbackForm from "../components/contacts/FeedbackForm";
+import UserDefaultLayout from "./layouts/UserDefaultLayout";
 
 const Contacts = () => {
+
     return (
         <>
-            Contacts
+            <UserDefaultLayout>
+                <FeedbackForm/>
+            </UserDefaultLayout>
         </>
     );
 };
