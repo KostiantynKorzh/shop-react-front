@@ -1,5 +1,5 @@
 import React from 'react';
-import FeedbackForm from "../components/contacts/FeedbackForm";
+import FeedbackForm from "../contacts/FeedbackForm";
 import UserDefaultLayout from "./layouts/UserDefaultLayout";
 
 const Contacts = () => {

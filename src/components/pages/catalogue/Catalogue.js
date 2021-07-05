@@ -1,26 +1,23 @@
 import React, {useEffect, useState} from 'react';
-import CatalogueService from "../../services/CatalogueService";
+import CatalogueService from "../../../services/CatalogueService";
 import {Button, Grid, TextField, Typography} from "@material-ui/core";
-import ItemCard from "../../components/catalogue/ItemCard";
+import ItemCard from "../../catalogue/ItemCard";
 import UserDefaultLayout from "../layouts/UserDefaultLayout";
+import {useDispatch, useSelector} from "react-redux";
 
 const Catalogue = (props) => {
 
-    const [items, setItems] = useState([]);
+    const items = useSelector(state => state.itemReducer.items);
+
+    const dispatch = useDispatch();
 
     const [newTitle, setNewTitle] = useState('');
     const [newPrice, setNewPrice] = useState('');
     const [newImage, setNewImage] = useState('');
 
-    const fetchItems = () => {
-        CatalogueService.getAllItems()
-            .then(resp => setItems(resp.data))
-            .catch(err => console.log(err))
-    }
-
     useEffect(() => {
-        fetchItems();
-    }, [])
+        dispatch(CatalogueService.getAllItems());
+    }, [dispatch])
 
 
     return (
@@ -30,7 +27,7 @@ const Catalogue = (props) => {
                     Catalogue
                 </Typography>
                 <Grid container spacing={3}>
-                    {items.map(item => (
+                    {items && items.map(item => (
                         <Grid item xs={12} md={6} lg={4}>
                             <ItemCard
                                 {...props}
@@ -62,8 +59,7 @@ const Catalogue = (props) => {
                     </div>
                     <Button variant="contained" color="primary"
                             onClick={() => {
-                                CatalogueService.createNewItem(newTitle, newPrice, newImage)
-                                    .then(() => fetchItems());
+                                dispatch(CatalogueService.createNewItem(newTitle, newPrice, newImage));
                                 setNewTitle('');
                                 setNewPrice('');
                                 setNewImage('')

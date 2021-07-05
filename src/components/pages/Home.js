@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from "react-router-dom";
-import * as Constants from "../utils/Constants"
+import * as Constants from "../../utils/Constants"
 import UserDefaultLayout from "./layouts/UserDefaultLayout";
 
 const Home = () => {

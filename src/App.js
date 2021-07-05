@@ -1,11 +1,11 @@
 import React from 'react';
 import {BrowserRouter, Switch, Route} from "react-router-dom";
-import Home from "./pages/Home";
-import Admin from "./pages/Admin";
-import Catalogue from "./pages/catalogue/Catalogue";
-import Contacts from "./pages/Contacts";
-import Profile from "./pages/Profile";
-import Item from "./pages/catalogue/Item";
+import Home from "./components/pages/Home";
+import Admin from "./components/pages/Admin";
+import Catalogue from "./components/pages/catalogue/Catalogue";
+import Contacts from "./components/pages/Contacts";
+import Profile from "./components/pages/Profile";
+import Item from "./components/pages/catalogue/Item";
 
 export const App = () => {
     return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import AdminHeader from "../../components/common/headers/AdminHeader";
+import AdminHeader from "../../common/headers/AdminHeader";
 
 const AdminDefaultLayout = ({children}) => {
     return (

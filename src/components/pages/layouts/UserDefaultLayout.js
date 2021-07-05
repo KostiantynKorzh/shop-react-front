@@ -1,5 +1,5 @@
 import React from 'react';
-import UserHeader from "../../components/common/headers/UserHeader";
+import UserHeader from "../../common/headers/UserHeader";
 
 const UserDefaultLayout = ({children}) => {
     return (
