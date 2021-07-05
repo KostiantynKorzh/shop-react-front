@@ -1,5 +1,6 @@
 import React from 'react';
 import {Grid, GridList, SvgIcon} from "@material-ui/core";
+import {Link} from "react-router-dom";
 
 const UserHeader = () => {
     return (
@@ -10,16 +11,16 @@ const UserHeader = () => {
                         <Grid item xs={2}>
                             <ul style={{marginLeft: "10%"}}>
                                 <li>
-                                    <a href="/"><SvgIcon>
+                                    <Link to="/"><SvgIcon>
                                         <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
-                                    </SvgIcon></a>
+                                    </SvgIcon></Link>
                                 </li>
                             </ul>
                         </Grid>
                         <Grid item xs={7}>
                             <ul>
-                                <li><a href="/catalogue">Catalogue</a></li>
-                                <li><a href="/contacts">Contacts</a></li>
+                                <li><Link to="/catalogue">Catalogue</Link></li>
+                                <li><Link to="/contacts">Contacts</Link></li>
                             </ul>
                         </Grid>
                         <Grid item xs={3}>
@@ -28,7 +29,7 @@ const UserHeader = () => {
                                     float: "right",
                                     marginRight: "10%"
                                 }}>
-                                    <a href="/profile">Profile</a></li>
+                                    <Link to="/profile">Profile</Link></li>
                             </ul>
                         </Grid>
                     </Grid>

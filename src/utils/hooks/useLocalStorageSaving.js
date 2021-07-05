@@ -9,6 +9,8 @@ export const useLocalStorageSaving = (itemToSave) => {
             localStorage.setItem('currentItem', JSON.stringify(itemToSave));
         }
         setItem(JSON.parse(localStorage.getItem('currentItem')));
+
+        return () => localStorage.removeItem('currentItem');
     }, [])
 
     return item;

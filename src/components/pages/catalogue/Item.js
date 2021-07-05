@@ -3,10 +3,13 @@ import UserDefaultLayout from "../layouts/UserDefaultLayout";
 import {Grid, Paper, Typography} from "@material-ui/core";
 import {useSelector} from "react-redux";
 import {useLocalStorageSaving} from "../../../utils/hooks/useLocalStorageSaving";
+import {useParams} from "react-router";
 
 const Item = (props) => {
 
-    const itemFromRedux = useSelector(state => state.itemReducer.items.find(item => item.id == props.match.params.id))
+    const {id} = useParams();
+
+    const itemFromRedux = useSelector(state => state.itemReducer.items.find(item => item.id == id))
 
     const item = useLocalStorageSaving(itemFromRedux);
 
@@ -14,14 +17,14 @@ const Item = (props) => {
         <>
             <UserDefaultLayout>
                 <Grid container alignItems="center"
-                      // style={{border: 'solid green 3px'}}
+                    // style={{border: 'solid green 3px'}}
                 >
                     <Grid item xs={6} align={"center"}>
                         <Paper elevation={0}
-                        style={{
-                            maxHeight: '50vh',
-                            // border: 'solid blue 2px'
-                        }}>
+                               style={{
+                                   maxHeight: '50vh',
+                                   // border: 'solid blue 2px'
+                               }}>
                             <img
                                 src={item && item.imagePath}
                                 style={{
