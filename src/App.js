@@ -3,9 +3,11 @@ import {BrowserRouter, Switch, Route} from "react-router-dom";
 import Home from "./components/pages/Home";
 import Admin from "./components/pages/Admin";
 import Catalogue from "./components/pages/catalogue/Catalogue";
-import Contacts from "./components/pages/Contacts";
+import Contacts from "./components/pages/contacts/Contacts";
 import Profile from "./components/pages/Profile";
 import Item from "./components/pages/catalogue/Item";
+import Login from "./components/pages/auth/Login";
+import Signup from "./components/pages/auth/Signup";
 
 export const App = () => {
     return (
@@ -13,6 +15,8 @@ export const App = () => {
             <BrowserRouter>
                 <Switch>
                     <Route exact path={["/", "/home"]} component={Home}/>
+                    <Route exact path={"/login"} component={Login}/>
+                    <Route exact path={"/signup"} component={Signup}/>
                     <Route exact path={"/admin"} component={Admin}/>
                     <Route exact path={"/catalogue"} component={Catalogue}/>
                     <Route exact path={"/catalogue/:id"} component={Item}/>

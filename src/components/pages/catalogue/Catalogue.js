@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import CatalogueService from "../../../services/CatalogueService";
 import {Button, Grid, TextField, Typography} from "@material-ui/core";
-import ItemCard from "../../catalogue/ItemCard";
+import ItemCard from "./ItemCard";
 import UserDefaultLayout from "../layouts/UserDefaultLayout";
 import {useDispatch, useSelector} from "react-redux";
 

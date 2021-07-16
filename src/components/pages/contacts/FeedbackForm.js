@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Button, TextField} from "@material-ui/core";
-import FeedbackService from "../../services/FeedbackService";
+import FeedbackService from "../../../services/FeedbackService";
 
 const FeedbackForm = () => {
 
