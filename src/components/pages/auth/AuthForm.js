@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
 import {Button, TextField} from "@material-ui/core";
-import AuthService from "../../../services/AuthService";
+import {useDispatch} from "react-redux";
 
 const AuthForm = (props) => {
+
+    const dispatch = useDispatch();
 
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -47,9 +49,9 @@ const AuthForm = (props) => {
                 <Button variant="contained" color="primary"
                         onClick={() => {
                             if (props.buttonText === 'Sign up') {
-                                props.onClick(username, email, password)
+                                props.onClick(username, email, password);
                             } else {
-                                props.onClick(username, password)
+                                dispatch(props.onClick(username, password));
                             }
                             setUsername('');
                             setEmail('');

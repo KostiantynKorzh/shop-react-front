@@ -2,17 +2,21 @@ import React from 'react';
 import AuthForm from "./AuthForm";
 import AuthService from "../../../services/AuthService";
 import {Button} from "@material-ui/core";
+import {useDispatch} from "react-redux";
 
 const Login = () => {
+
+    const dispatch = useDispatch();
+
     return (
         <>
             <AuthForm buttonText={"Login"} onClick={AuthService.login}/>
             <Button variant="contained" color="primary"
-                    onClick={() => AuthService.logout()}>
+                    onClick={() => dispatch(AuthService.logout())}>
                 Logout
             </Button>
             <Button variant="contained" color="primary"
-                    onClick={() => AuthService.getUserSession()}>
+                    onClick={() => AuthService.getUsername()}>
                 Check
             </Button>
         </>

@@ -1,6 +1,5 @@
-import {CognitoUserPool, CognitoUser, AuthenticationDetails, CognitoUserAttribute} from 'amazon-cognito-identity-js';
-import {USER_URL} from "../utils/Constants";
-import axios from "axios";
+import {AuthenticationDetails, CognitoUser, CognitoUserAttribute, CognitoUserPool} from 'amazon-cognito-identity-js';
+import {storeUser, unstoreUser} from "../redux/actions/authActions";
 
 const pool = {
     UserPoolId: 'eu-central-1_0HWkkPINc',
@@ -9,7 +8,7 @@ const pool = {
 
 const UserPool = new CognitoUserPool(pool);
 
-const login = (username, password) => {
+const login = (username, password) => dispatch => {
     const user = new CognitoUser({
         Username: username,
         Pool: UserPool
@@ -23,6 +22,7 @@ const login = (username, password) => {
     user.authenticateUser(authDetails, {
         onSuccess: data => {
             console.log("Success", data);
+            dispatch(storeUser());
         },
         onFailure: data => {
             console.log("Failure", data);
@@ -37,58 +37,34 @@ const signup = (username, email, password) => {
                 console.log(err);
             } else if (res) {
                 console.log(res);
-                saveUserOnSever(username, email);
             }
         })
 };
 
-const logout = () => {
+const logout = () => dispatch => {
     UserPool.getCurrentUser().signOut();
+    dispatch(unstoreUser());
 }
 
-const verify = (username, code) => {
-    const user = new CognitoUser({
-        Username: username,
-        Pool: UserPool
-    });
+// const getUsername = () => {
+//     return new Promise((resolve, reject) => {
+//         if (UserPool.getCurrentUser() != null) {
+//             return resolve(UserPool.getCurrentUser().getUsername());
+//         }
+//         return reject("No authenticated user");
+//     });
+// };
 
-    user.getAttributeVerificationCode('email', {
-        onSuccess: function (result) {
-            console.log('call result: ' + result);
-        },
-        onFailure: function (err) {
-            console.log(err.message || JSON.stringify(err));
-        },
-        inputVerificationCode: function () {
-            user.verifyAttribute('email', code, this);
-        },
-    });
-
-    // user.verifyAttribute('email', code, {
-    //     onSuccess: data => console.log(data),
-    //     onFailure: err => console.log(err)
-    // });
-}
-
-const saveUserOnSever = (username, email) => {
-    // axios.post(USER_URL, {
-    //     username: username,
-    //     email: email
-    // })
-}
-
-const getUserSession = () => {
+const getUsername = () => {
     if (UserPool.getCurrentUser() != null) {
-        console.log(UserPool.getCurrentUser().getUsername());
-    } else {
-        console.log("no user");
+        return UserPool.getCurrentUser().getUsername();
     }
-}
+    return null;
+};
 
 export default {
     login,
     signup,
     logout,
-    verify,
-    getUserSession
+    getUsername
 }

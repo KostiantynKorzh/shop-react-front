@@ -1,36 +1,39 @@
 import React, {useState} from 'react';
-import UserService from "../../services/UserService";
 import UserDefaultLayout from "./layouts/UserDefaultLayout";
+import {useUserAuthData} from "../../utils/hooks/useUserAuthData";
 
 const Profile = () => {
 
+    const user = useUserAuthData();
+
     const [users, setUsers] = useState([]);
-    const [user, setUser] = useState({});
+    // const [user, setUser] = useState({});
 
-    const fetchUsers = () => {
-        UserService.getAllUsers()
-            .then(resp => {
-                console.log(resp.data)
-                setUsers(resp.data)
-            })
-            .catch(err => alert(err));
-    }
 
-    const fetchUserById = (id) => {
-        UserService.getUserById(id)
-            .then(resp => setUser(resp.data))
-            .catch(err => alert(err));
-    }
-
-    useState(() => {
-        fetchUsers();
-        fetchUserById(1);
-    }, [])
+    // const fetchUsers = () => {
+    //     UserService.getAllUsers()
+    //         .then(resp => {
+    //             console.log(resp.data)
+    //             setUsers(resp.data)
+    //         })
+    //         .catch(err => alert(err));
+    // }
+    //
+    // const fetchUserById = (id) => {
+    //     UserService.getUserById(id)
+    //         .then(resp => setUser(resp.data))
+    //         .catch(err => alert(err));
+    // }
+    //
+    // useEffect(() => {
+    //     fetchUsers();
+    //     fetchUserById(1);
+    // }, [])
 
     return (
         <>
             <UserDefaultLayout>
-                User: {user.username} with id {user.id}
+                User: {user && user.username}
                 <ul>
                     {users.map((user) => <li>{user.username}</li>)}
                 </ul>
