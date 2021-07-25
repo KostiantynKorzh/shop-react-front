@@ -11,10 +11,6 @@ const Catalogue = (props) => {
 
     const dispatch = useDispatch();
 
-    const [newTitle, setNewTitle] = useState('');
-    const [newPrice, setNewPrice] = useState('');
-    const [newImage, setNewImage] = useState('');
-
     useEffect(() => {
         dispatch(CatalogueService.getAllItems());
     }, [dispatch])
@@ -35,38 +31,6 @@ const Catalogue = (props) => {
                         </Grid>
                     ))}
                 </Grid>
-                <form>
-                    <div>
-                        <TextField
-                            label={"Title"}
-                            value={newTitle}
-                            onChange={e => setNewTitle(e.target.value)}>
-                        </TextField>
-                    </div>
-                    <div>
-                        <TextField
-                            label={"Price"}
-                            value={newPrice}
-                            onChange={e => setNewPrice(e.target.value)}>
-                        </TextField>
-                    </div>
-                    <div>
-                        <TextField
-                            label={"Image path"}
-                            value={newImage}
-                            onChange={e => setNewImage(e.target.value)}>
-                        </TextField>
-                    </div>
-                    <Button variant="contained" color="primary"
-                            onClick={() => {
-                                dispatch(CatalogueService.createNewItem(newTitle, newPrice, newImage));
-                                setNewTitle('');
-                                setNewPrice('');
-                                setNewImage('')
-                            }}>
-                        Submit
-                    </Button>
-                </form>
             </UserDefaultLayout>
         </>
     );
