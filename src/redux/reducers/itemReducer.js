@@ -1,4 +1,4 @@
-import * as Actions from '../actions/Actions'
+import * as Actions from '../actions/Actions';
 
 const initialState = {
     items: [],

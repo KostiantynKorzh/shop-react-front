@@ -8,3 +8,6 @@ export const CREATE_ITEM_FAILURE = 'CREATE_ITEM_FAILURE';
 
 export const STORE_USER = 'STORE_USER';
 export const UNSTORE_USER = 'UNSTORE_USER';
+
+export const ADD_ITEM_TO_CART = 'ADD_ITEM_TO_CART';
+export const DELETE_ITEM_FROM_CART = 'DELETE_ITEM_FROM_CART';

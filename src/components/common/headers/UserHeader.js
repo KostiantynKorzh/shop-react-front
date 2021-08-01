@@ -1,8 +1,12 @@
 import React from 'react';
 import {Grid, GridList, SvgIcon} from "@material-ui/core";
 import {Link} from "react-router-dom";
+import AuthService from "../../../services/AuthService";
 
 const UserHeader = () => {
+
+    const user = AuthService.getUsername();
+
     return (
         <>
             <div className={"navbar-fake"}>
@@ -29,7 +33,8 @@ const UserHeader = () => {
                                     float: "right",
                                     marginRight: "10%"
                                 }}>
-                                    <Link to="/profile">Profile</Link></li>
+                                    {user && <Link to="/profile">{user}</Link>}
+                                </li>
                             </ul>
                         </Grid>
                     </Grid>

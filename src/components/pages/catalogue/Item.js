@@ -1,17 +1,21 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import UserDefaultLayout from "../layouts/UserDefaultLayout";
-import {Grid, Paper, Typography} from "@material-ui/core";
-import {useSelector} from "react-redux";
+import {Grid, IconButton, Paper, Typography} from "@material-ui/core";
+import {useDispatch, useSelector} from "react-redux";
 import {useLocalStorageSaving} from "../../../utils/hooks/useLocalStorageSaving";
 import {useParams} from "react-router";
+import AddIcon from '@material-ui/icons/Add';
+import CartService from "../../../services/CartService";
 
-const Item = (props) => {
+const Item = () => {
 
     const {id} = useParams();
 
     const itemFromRedux = useSelector(state => state.itemReducer.items.find(item => item.id == id))
 
     const item = useLocalStorageSaving(itemFromRedux);
+
+    const dispatch = useDispatch();
 
     return (
         <>
@@ -40,6 +44,16 @@ const Item = (props) => {
                         <Typography align="center" variant={"h1"}>
                             {item && item.title}
                         </Typography>
+                        <IconButton
+                            style={{
+                                position: 'relative',
+                                right: '-500px',
+                                top: '55vh'
+                            }}
+                            onClick={() => dispatch(CartService.addItemToCart(1, parseInt(id), 44))}
+                        >
+                            <AddIcon/>
+                        </IconButton>
                         <Typography align={"right"}
                                     style={{
                                         position: 'relative',
