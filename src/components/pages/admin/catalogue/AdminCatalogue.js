@@ -62,7 +62,7 @@ const AdminCatalogue = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {items.map((item) => {
+                            {items && items.map((item) => {
                                 return (
                                     <TableRow hover role="checkbox"
                                         // tabIndex={-1}

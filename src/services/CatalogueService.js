@@ -10,14 +10,14 @@ import {
 
 const getAllItems = () => dispatch => {
     dispatch(fetchItemsBegin());
-    axios.get(CATALOGUE_URL)
+    axios.get(CATALOGUE_URL + 'items/')
         .then(resp => dispatch(fetchItemsSuccess(resp.data)))
         .catch(error => dispatch(fetchItemsFailure(error)));
 }
 
 const createNewItem = (title, price, imagePath) => dispatch => {
     dispatch(createItemBegin());
-    axios.post(CATALOGUE_URL, {title, price, imagePath})
+    axios.post(CATALOGUE_URL + 'items/', {title, price, imagePath})
         .then(() => dispatch(getAllItems()))
         .catch(error => dispatch(createItemFailure(error)));
 }

@@ -19,9 +19,8 @@ export const App = () => {
                     <Route exact path={["/", "/home"]} component={Home}/>
                     <Route exact path={"/login"} component={Login}/>
                     <Route exact path={"/signup"} component={Signup}/>
-                    <Route exact path={"/admin"} component={AdminCatalogue}/>
-                    <Route exact path={"/admin/catalogue"} component={AdminCatalogue}/>
                     <Route exact path={"/admin/users"} component={AdminUsers}/>
+                    <Route exact path={["/admin", "/admin/catalogue"]} component={AdminCatalogue}/>
                     <Route exact path={"/catalogue"} component={Catalogue}/>
                     <Route exact path={"/catalogue/:id"} component={Item}/>
                     <Route exact path={"/contacts"} component={Contacts}/>
