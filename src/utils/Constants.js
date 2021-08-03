@@ -7,6 +7,6 @@ export const USER_URL = "http://localhost:8082/" + "users/";
 
 export const FEEDBACK_URL = "http://localhost:2344/";
 
-export const ADMIN_URL = "http://localhost:8000/";
+export const ADMIN_URL = "http://demoshop-dev-lb-648034961.eu-central-1.elb.amazonaws.com:8000/";
 
 export const ORDER_URL = "http://localhost:1313/";

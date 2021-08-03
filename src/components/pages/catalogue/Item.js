@@ -6,6 +6,7 @@ import {useLocalStorageSaving} from "../../../utils/hooks/useLocalStorageSaving"
 import {useParams} from "react-router";
 import AddIcon from '@material-ui/icons/Add';
 import CartService from "../../../services/CartService";
+import UserService from "../../../services/UserService";
 
 const Item = () => {
 
@@ -50,7 +51,12 @@ const Item = () => {
                                 right: '-500px',
                                 top: '55vh'
                             }}
-                            onClick={() => dispatch(CartService.addItemToCart(1, parseInt(id), 44))}
+                            onClick={() => {
+                                UserService.getUserIdByUsername()
+                                    .then(console.log)
+                                    .catch(console.log)
+                                dispatch(CartService.addItemToCart(parseInt(id), 44))
+                            }}
                         >
                             <AddIcon/>
                         </IconButton>

@@ -1,11 +1,29 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Grid, GridList, SvgIcon} from "@material-ui/core";
 import {Link} from "react-router-dom";
 import AuthService from "../../../services/AuthService";
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import UserService from "../../../services/UserService";
+import {ORDER_URL} from "../../../utils/Constants";
+import axios from "axios";
 
 const UserHeader = () => {
 
     const user = AuthService.getUsername();
+
+    const [cart, setCart] = useState();
+
+    useEffect(() => {
+        UserService.getUserIdByUsername()
+            .then(resp => {
+                console.log(resp)
+                const url = ORDER_URL + 'orders/user-orders/' + resp.data;
+                console.log(url);
+                axios.get(url)
+                    .then(resp => setCart(resp.data));
+            });
+    }, [])
 
     return (
         <>
@@ -27,13 +45,27 @@ const UserHeader = () => {
                                 <li><Link to="/contacts">Contacts</Link></li>
                             </ul>
                         </Grid>
-                        <Grid item xs={3}>
+                        <Grid item xs={2}>
                             <ul>
                                 <li style={{
                                     float: "right",
                                     marginRight: "10%"
                                 }}>
-                                    {user && <Link to="/profile">{user}</Link>}
+                                    {cart && <Link to="/cart">
+                                        <ShoppingCartIcon/>
+                                    </Link>}
+                                </li>
+                            </ul>
+                        </Grid>
+                        <Grid item xs={1}>
+                            <ul>
+                                <li style={{
+                                    float: "right",
+                                    marginRight: "20%"
+                                }}>
+                                    {user && <Link to="/profile">
+                                        <AccountCircleIcon/>
+                                    </Link>}
                                 </li>
                             </ul>
                         </Grid>

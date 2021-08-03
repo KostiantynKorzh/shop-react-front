@@ -9,6 +9,7 @@ import Item from "./components/pages/catalogue/Item";
 import Login from "./components/pages/auth/Login";
 import Signup from "./components/pages/auth/Signup";
 import AdminUsers from "./components/pages/admin/users/AdminUsers";
+import Cart from "./components/pages/Cart";
 
 export const App = () => {
     return (
@@ -25,6 +26,7 @@ export const App = () => {
                     <Route exact path={"/catalogue/:id"} component={Item}/>
                     <Route exact path={"/contacts"} component={Contacts}/>
                     <Route exact path={"/profile"} component={Profile}/>
+                    <Route exact path={"/cart"} component={Cart}/>
                 </Switch>
             </BrowserRouter>
         </>
