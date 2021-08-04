@@ -23,6 +23,12 @@ const Home = () => {
                 <div>
                     <Link to={"/profile"}>Profile</Link>
                 </div>
+                <div>
+                    <Link to={"/login"}>Login</Link>
+                </div>
+                <div>
+                    <Link to={"/signup"}>Signup</Link>
+                </div>
             </UserDefaultLayout>
         </>
     );

@@ -42,8 +42,10 @@ const signup = (username, email, password) => {
 };
 
 const logout = () => dispatch => {
-    UserPool.getCurrentUser().signOut();
-    dispatch(unstoreUser());
+    if (UserPool.getCurrentUser() != null) {
+        UserPool.getCurrentUser().signOut();
+        dispatch(unstoreUser());
+    }
 }
 
 // const getUsername = () => {

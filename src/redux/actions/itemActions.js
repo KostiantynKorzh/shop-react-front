@@ -30,3 +30,18 @@ export const createItemFailure = error => ({
     type: Actions.CREATE_ITEM_FAILURE,
     payload: {error}
 });
+
+// spinner or smth like that
+export const updateItemBegin = () => ({
+    type: Actions.CREATE_ITEM_BEGIN
+});
+
+export const updateItemSuccess = item => ({
+    type: Actions.CREATE_ITEM_SUCCESS,
+    payload: {item}
+});
+
+export const updateItemFailure = error => ({
+    type: Actions.CREATE_ITEM_FAILURE,
+    payload: {error}
+});
