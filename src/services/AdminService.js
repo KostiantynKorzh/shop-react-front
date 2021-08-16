@@ -1,33 +1,30 @@
-import {
-    createItemBegin,
-    createItemFailure,
-    fetchItemsBegin,
-    fetchItemsFailure,
-    fetchItemsSuccess
-} from "../redux/actions/itemActions";
 import axios from "axios";
 import {ADMIN_URL} from "../utils/Constants";
 import {fetchBegin, fetchFailure} from "../redux/actions/fetchActions";
 import {fetchUsersSuccess} from "../redux/actions/userActions";
+import {fetchAdminItemsSuccess, updateAdminItemSuccess} from "../redux/actions/admin/adminItemActions";
+import {fetchAdminUsersSuccess} from "../redux/actions/admin/adminUserReducer";
 
 // TODO Remove ItemService and implement Redux for all methods
 
 const getAllItems = () => dispatch => {
-    dispatch(fetchItemsBegin());
+    dispatch(fetchBegin());
     axios.get(ADMIN_URL + 'items/')
-        .then(resp => dispatch(fetchItemsSuccess(resp.data)))
-        .catch(error => dispatch(fetchItemsFailure(error)));
+        .then(resp => dispatch(fetchAdminItemsSuccess(resp.data)))
+        .catch(error => dispatch(fetchFailure(error)));
 }
 
 const createNewItem = (title, price, imagePath) => dispatch => {
-    dispatch(createItemBegin());
+    dispatch(fetchBegin());
     axios.post(ADMIN_URL + 'items/', {title, price, imagePath})
         .then(() => dispatch(getAllItems()))
-        .catch(error => dispatch(createItemFailure(error)));
+        .catch(error => dispatch(fetchFailure(error)));
 }
 
-const updateItem = (id, title, price, imagePath) => {
-    axios.put(ADMIN_URL + 'items/' + id, {title, price, imagePath});
+const updateItem = (id, title, price, imagePath) => dispatch => {
+    axios.put(ADMIN_URL + 'items/' + id, {title, price, imagePath})
+        .then(resp => dispatch(updateAdminItemSuccess(resp.data)))
+        .catch(error => dispatch(fetchFailure(error)));
 }
 
 const deleteItem = (id) => {
@@ -37,7 +34,7 @@ const deleteItem = (id) => {
 const getAllUsers = () => dispatch => {
     dispatch(fetchBegin());
     axios.get(ADMIN_URL + 'users/')
-        .then(resp => dispatch(fetchUsersSuccess(resp.data)))
+        .then(resp => dispatch(fetchAdminUsersSuccess(resp.data)))
         .catch(error => dispatch(fetchFailure(error)));
 };
 

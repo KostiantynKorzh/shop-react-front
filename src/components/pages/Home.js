@@ -18,9 +18,6 @@ const Home = () => {
                     <Link to={"/catalogue"}>Catalogue</Link>
                 </div>
                 <div>
-                    <Link to={"/contacts"}>Contacts</Link>
-                </div>
-                <div>
                     <Link to={"/profile"}>Profile</Link>
                 </div>
                 <div>

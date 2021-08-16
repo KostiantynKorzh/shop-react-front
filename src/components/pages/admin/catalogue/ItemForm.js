@@ -12,11 +12,10 @@ const ItemForm = ({open, setOpen, item}) => {
     const [newImage, setNewImage] = useState('');
 
     useEffect(() => {
-        console.log(item)
         if (item) {
-            setNewTitle(item.fields.title);
-            setNewPrice(item.fields.price);
-            setNewImage(item.fields.image_path);
+            setNewTitle(item.title);
+            setNewPrice(item.price);
+            setNewImage(item.imagePath);
         }
     }, [open])
 
@@ -25,14 +24,9 @@ const ItemForm = ({open, setOpen, item}) => {
             <Dialog open={open}
                     onClose={() => setOpen(false)}
                 // styles={{minWidth: 120}}
-                    fullWidth={120}
             >
                 <DialogTitle id="form-dialog-title">Create new item</DialogTitle>
                 <DialogContent>
-                    {/*<DialogContentText>*/}
-                    {/*    To subscribe to this website, please enter your email address here. We will send updates*/}
-                    {/*    occasionally.*/}
-                    {/*</DialogContentText>*/}
                     <div>
                         <TextField
                             label={"Title"}
@@ -68,7 +62,7 @@ const ItemForm = ({open, setOpen, item}) => {
                     <Button variant="contained" color="primary"
                             onClick={() => {
                                 if (item) {
-                                    AdminService.updateItem(item.pk, newTitle, newPrice, newImage)
+                                    dispatch(AdminService.updateItem(item.id, newTitle, newPrice, newImage));
                                 } else {
                                     dispatch(AdminService.createNewItem(newTitle, newPrice, newImage));
                                 }

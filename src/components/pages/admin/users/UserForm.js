@@ -13,8 +13,8 @@ const UserForm = ({open, setOpen, user}) => {
     useEffect(() => {
         if (user) {
             console.log(user)
-            setNewUsername(user.fields.username);
-            setNewEmail(user.fields.email);
+            setNewUsername(user.username);
+            setNewEmail(user.email);
         }
     }, [open])
 
@@ -22,15 +22,9 @@ const UserForm = ({open, setOpen, user}) => {
         <>
             <Dialog open={open}
                     onClose={() => setOpen(false)}
-                // styles={{minWidth: 120}}
-                    fullWidth={120}
             >
                 <DialogTitle id="form-dialog-title">Create new item</DialogTitle>
                 <DialogContent>
-                    {/*<DialogContentText>*/}
-                    {/*    To subscribe to this website, please enter your email address here. We will send updates*/}
-                    {/*    occasionally.*/}
-                    {/*</DialogContentText>*/}
                     <div>
                         <TextField
                             label={"Username"}
@@ -57,7 +51,7 @@ const UserForm = ({open, setOpen, user}) => {
                     <Button variant="contained" color="primary"
                             onClick={() => {
                                 if (user) {
-                                    AdminService.updateUser(user.pk, newUsername, newEmail)
+                                    dispatch(AdminService.updateUser(user.id, newUsername, newEmail))
                                 } else {
                                     dispatch(AdminService.createNewUser(newUsername, newEmail));
                                 }

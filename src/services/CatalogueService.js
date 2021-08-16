@@ -1,25 +1,23 @@
 import axios from 'axios';
 import {CATALOGUE_URL} from "../utils/Constants";
-import {
-    createItemBegin, createItemFailure,
-    createItemSuccess,
-    fetchItemsBegin,
-    fetchItemsFailure,
-    fetchItemsSuccess
-} from "../redux/actions/itemActions";
+import {fetchItemsSuccess} from "../redux/actions/itemActions";
+import {fetchBegin, fetchFailure} from "../redux/actions/fetchActions";
+import {useSelector} from "react-redux";
+import {itemReducer} from "../redux/reducers/itemReducer";
+
 
 const getAllItems = () => dispatch => {
-    dispatch(fetchItemsBegin());
+    dispatch(fetchBegin());
     axios.get(CATALOGUE_URL + 'items/')
         .then(resp => dispatch(fetchItemsSuccess(resp.data)))
-        .catch(error => dispatch(fetchItemsFailure(error)));
+        .catch(error => dispatch(fetchFailure(error)));
 }
 
 const createNewItem = (title, price, imagePath) => dispatch => {
-    dispatch(createItemBegin());
+    dispatch(fetchBegin());
     axios.post(CATALOGUE_URL + 'items/', {title, price, imagePath})
         .then(() => dispatch(getAllItems()))
-        .catch(error => dispatch(createItemFailure(error)));
+        .catch(error => dispatch(fetchFailure(error)));
 }
 
 export default {

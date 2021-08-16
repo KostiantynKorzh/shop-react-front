@@ -5,7 +5,7 @@ import AdminDefaultLayout from "../../layouts/AdminDefaultLayout";
 import GenericTable from "../common/GenericTable";
 
 const AdminUsers = () => {
-    const users = useSelector(state => state.userReducer.users);
+    const users = useSelector(state => state.adminUserReducer.adminUsers);
 
     const dispatch = useDispatch();
 
@@ -14,9 +14,12 @@ const AdminUsers = () => {
         dispatch(AdminService.getAllUsers());
     }, [dispatch])
 
+    useEffect(()=>{
+        console.log(users)
+    },[])
 
     const columns = [
-        {id: 'pk', label: 'ID', maxWidth: 30},
+        {id: 'id', label: 'ID', maxWidth: 30},
         {id: 'username', label: 'Username', maxWidth: 100},
         {id: 'email', label: 'Email', maxWidth: 70},
     ];

@@ -4,6 +4,7 @@ export const fetchBegin = () => ({
     type: Actions.FETCH_BEGIN
 });
 
-export const fetchFailure = () => ({
-    type: Actions.FETCH_FAILURE
+export const fetchFailure = error => ({
+    type: Actions.FETCH_FAILURE,
+    payload: {error}
 });

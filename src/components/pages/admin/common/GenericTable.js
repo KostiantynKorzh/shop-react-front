@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@material-ui/core";
 import ItemForm from "../catalogue/ItemForm";
 import UserForm from "../users/UserForm";
@@ -9,7 +9,6 @@ const GenericTable = ({columns, data, deleteObjectFunc, type}) => {
     const [openUpdate, setOpenUpdate] = useState(false);
 
     const [currentObject, setCurrentObject] = useState(null);
-
 
     return (
         <>
@@ -28,11 +27,6 @@ const GenericTable = ({columns, data, deleteObjectFunc, type}) => {
                             {columns.map((column) => (
                                 <TableCell
                                     key={column.id}
-                                    // align={column.align}
-                                    style={{
-                                        // minWidth: column.minWidth,
-                                        // width: 30
-                                    }}
                                 >
                                     {column.label}
                                 </TableCell>
@@ -43,16 +37,10 @@ const GenericTable = ({columns, data, deleteObjectFunc, type}) => {
                         {data && data.map((data) => {
                             return (
                                 <TableRow hover role="checkbox"
-                                    // tabIndex={-1}
-                                          key={data.pk}
+                                          key={data.id}
                                 >
                                     {columns.map((column) => {
-                                        let value = '';
-                                        if (column.id == 'pk') {
-                                            value = data[column.id];
-                                        } else {
-                                            value = data.fields[column.id];
-                                        }
+                                        const value = data[column.id];
                                         return (
                                             <TableCell key={column.id}
                                                 // style={{maxWidth: "200px"}}
@@ -97,13 +85,13 @@ const GenericTable = ({columns, data, deleteObjectFunc, type}) => {
                 </Table>
             </TableContainer>
 
-            {type === 'USERS'&&(
+            {type === 'USERS' && (
                 <>
                     <UserForm open={openCreate} setOpen={setOpenCreate} action={'CREATE'}/>
                     <UserForm open={openUpdate} setOpen={setOpenUpdate} action={'UPDATE'} user={currentObject}/>
                 </>
             )}
-            {type === 'ITEMS'&&(
+            {type === 'ITEMS' && (
                 <>
                     <ItemForm open={openCreate} setOpen={setOpenCreate} action={'CREATE'}/>
                     <ItemForm open={openUpdate} setOpen={setOpenUpdate} action={'UPDATE'} item={currentObject}/>

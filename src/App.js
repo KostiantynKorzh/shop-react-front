@@ -1,9 +1,8 @@
 import React from 'react';
-import {BrowserRouter, Switch, Route} from "react-router-dom";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 import Home from "./components/pages/Home";
 import AdminCatalogue from "./components/pages/admin/catalogue/AdminCatalogue";
 import Catalogue from "./components/pages/catalogue/Catalogue";
-import Contacts from "./components/pages/contacts/Contacts";
 import Profile from "./components/pages/Profile";
 import Item from "./components/pages/catalogue/Item";
 import Login from "./components/pages/auth/Login";
@@ -23,7 +22,6 @@ export const App = () => {
                     <Route exact path={["/admin", "/admin/catalogue"]} component={AdminCatalogue}/>
                     <Route exact path={"/catalogue"} component={Catalogue}/>
                     <Route exact path={"/catalogue/:id"} component={Item}/>
-                    <Route exact path={"/contacts"} component={Contacts}/>
                     <Route exact path={"/profile"} component={Profile}/>
                     <Route exact path={"/cart"} component={Cart}/>
                 </Switch>

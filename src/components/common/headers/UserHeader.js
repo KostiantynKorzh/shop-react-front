@@ -42,7 +42,6 @@ const UserHeader = () => {
                         <Grid item xs={7}>
                             <ul>
                                 <li><Link to="/catalogue">Catalogue</Link></li>
-                                <li><Link to="/contacts">Contacts</Link></li>
                             </ul>
                         </Grid>
                         <Grid item xs={2}>
