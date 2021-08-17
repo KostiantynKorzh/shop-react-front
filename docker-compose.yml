@@ -1,0 +1,31 @@
+services:
+#  front:
+#    build: .
+#    ports:
+#      - "3000:3000"
+#    environment:
+#      - REACT_APP_NODE_ENV=development
+#      - REACT_APP_CATALOGUE_URL=http://localhost:8081/
+#      - REACT_APP_USER_URL=http://localhost:8082/
+#      - REACT_APP_ADMIN_URL=http://localhost:8000/
+#      - REACT_APP_ORDER_URL=http://localhost:1313/
+  admin-service:
+    image: maximshcherbachenko/demoshop-admin-service-dev
+    ports:
+      - "8000:8000"
+    environment:
+      - MYSQL_HOST=demo-shop.c9pmrkdcjaav.eu-central-1.rds.amazonaws.com
+  catalogue-service:
+    image: kostiakorzh/demoshop-catalogue-service-dev
+    ports:
+      - "8081:8081"
+    environment:
+      - MYSQL_URL=jdbc:mysql://demo-shop.c9pmrkdcjaav.eu-central-1.rds.amazonaws.com/catalogue_db
+      - MYSQL_ROOT_PASSWORD=root1234
+  user-service:
+    image: kostiakorzh/demoshop-user-service-dev
+    ports:
+      - "8082:8082"
+    environment:
+      - MYSQL_URL=jdbc:mysql://demo-shop.c9pmrkdcjaav.eu-central-1.rds.amazonaws.com/users_db
+      - MYSQL_ROOT_PASSWORD=root1234

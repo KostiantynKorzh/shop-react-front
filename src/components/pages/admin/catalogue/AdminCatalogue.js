@@ -15,7 +15,7 @@ const AdminCatalogue = () => {
 
 
     const columns = [
-        {id: 'pk', label: 'ID', maxWidth: 30},
+        {id: 'id', label: 'ID', maxWidth: 30},
         {id: 'title', label: 'Title', maxWidth: 100},
         {id: 'price', label: 'Price', maxWidth: 70},
         {id: 'imagePath', label: 'Image path', maxWidth: 300},
