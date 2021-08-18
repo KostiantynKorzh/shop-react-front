@@ -1,9 +1,9 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import AdminDefaultLayout from "../../layouts/AdminDefaultLayout";
 import {useDispatch, useSelector} from "react-redux";
-import AdminService from "../../../../services/AdminService";
 import GenericTable from "../common/GenericTable";
 import {useCollectionFromStore} from "../../../../utils/hooks/useCollectionFromStore";
+import AdminCatalogueService from "../../../../services/admin/AdminCatalogueService";
 
 const AdminCatalogue = () => {
 
@@ -11,7 +11,7 @@ const AdminCatalogue = () => {
 
     const dispatch = useDispatch();
 
-    useCollectionFromStore(adminItems, AdminService.getAllItems());
+    useCollectionFromStore(adminItems, AdminCatalogueService.getAllItems());
 
 
     const columns = [
@@ -26,7 +26,7 @@ const AdminCatalogue = () => {
     return (
         <>
             <AdminDefaultLayout>
-                <GenericTable columns={columns} data={adminItems} deleteObjectFunc={dispatch(AdminService.deleteItem)}
+                <GenericTable columns={columns} data={adminItems} deleteObjectFunc={dispatch(AdminCatalogueService.deleteItem)}
                               type={"ITEMS"}/>
             </AdminDefaultLayout>
         </>

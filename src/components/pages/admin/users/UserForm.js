@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField} from "@material-ui/core";
 import {useDispatch} from "react-redux";
-import AdminService from "../../../../services/AdminService";
+import AdminUserService from "../../../../services/admin/AdminUserService";
 
 const UserForm = ({open, setOpen, user}) => {
 
@@ -51,9 +51,9 @@ const UserForm = ({open, setOpen, user}) => {
                     <Button variant="contained" color="primary"
                             onClick={() => {
                                 if (user) {
-                                    dispatch(AdminService.updateUser(user.id, newUsername, newEmail))
+                                    dispatch(AdminUserService.updateUser(user.id, newUsername, newEmail))
                                 } else {
-                                    dispatch(AdminService.createNewUser(newUsername, newEmail));
+                                    dispatch(AdminUserService.createNewUser(newUsername, newEmail));
                                 }
                                 setNewUsername('');
                                 setNewEmail('');

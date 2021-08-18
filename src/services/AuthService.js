@@ -1,13 +1,24 @@
 import {AuthenticationDetails, CognitoUser, CognitoUserAttribute, CognitoUserPool} from 'amazon-cognito-identity-js';
 import {storeUser, unstoreUser} from "../redux/actions/authActions";
-import * as AWS from 'aws-sdk/global';
+import * as AWS from 'aws-sdk';
+import {CLIENT_ID, IDENTITY_POOL_ID, USER_POOL_ID} from "../utils/Constants";
+import AdminUserService from "./admin/AdminUserService";
 
 const pool = {
-    UserPoolId: 'eu-central-1_0HWkkPINc',
-    ClientId: '37ondtr8ghd6nf68crrfk8ksor'
+    UserPoolId: USER_POOL_ID,
+    ClientId: CLIENT_ID
 }
 
 const UserPool = new CognitoUserPool(pool);
+
+AWS.config.update({
+    region: 'eu-central-1',
+    accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY,
+    secretAccessKey: process.env.REACT_APP_AWS_ACCESS_SECRET
+});
+
+const cognitoIdentityServiceProvider = new AWS.CognitoIdentityServiceProvider();
+
 
 const login = (username, password) => dispatch => {
     const user = new CognitoUser({
@@ -20,13 +31,6 @@ const login = (username, password) => dispatch => {
         Password: password
     });
 
-    const userData = {
-        Username: username,
-        Pool: UserPool,
-    }
-
-    const cognitoUser = new CognitoUser(userData);
-
     user.authenticateUser(authDetails, {
         onSuccess: data => {
             const accessToken = data.getAccessToken().getJwtToken();
@@ -34,7 +38,7 @@ const login = (username, password) => dispatch => {
             AWS.config.region = 'eu-central-1';
 
             AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-                IdentityPoolId: 'eu-central-1:093ceb44-d764-4cef-9123-4902b066d5f8',
+                IdentityPoolId: IDENTITY_POOL_ID,
                 Logins: {
                     'cognito-idp.eu-central-1.amazonaws.com/eu-central-1_0HWkkPINc': data
                         .getIdToken()
@@ -62,6 +66,47 @@ const login = (username, password) => dispatch => {
     })
 };
 
+const disableUser = (username) => {
+
+    const params = {
+        UserPoolId: USER_POOL_ID,
+        Username: username
+    };
+
+    AdminUserService.disableUser(username)
+        .then(() => {
+            cognitoIdentityServiceProvider.adminDisableUser(params, function (err, data) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log(data);
+                }
+            });
+        })
+        .catch(console.log)
+};
+
+const enableUser = (username) => {
+
+    const params = {
+        UserPoolId: USER_POOL_ID,
+        Username: username
+    };
+
+    AdminUserService.enableUser(username)
+        .then(() => {
+            cognitoIdentityServiceProvider.adminEnableUser(params, function (err, data) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log(data);
+                }
+            });
+        })
+        .catch(console.log)
+};
+
+
 const signup = (username, email, password) => {
     UserPool.signUp(username, password, [new CognitoUserAttribute({Name: 'email', Value: email})],
         null, (err, res) => {
@@ -78,16 +123,7 @@ const logout = () => dispatch => {
         UserPool.getCurrentUser().signOut();
         dispatch(unstoreUser());
     }
-}
-
-// const getUsername = () => {
-//     return new Promise((resolve, reject) => {
-//         if (UserPool.getCurrentUser() != null) {
-//             return resolve(UserPool.getCurrentUser().getUsername());
-//         }
-//         return reject("No authenticated user");
-//     });
-// };
+};
 
 const getUsername = () => {
     if (UserPool.getCurrentUser() != null) {
@@ -96,27 +132,11 @@ const getUsername = () => {
     return null;
 };
 
-const disableUser = (username) => {
-    const user = UserPool.getCurrentUser();
-
-    user.getSession(function (err, session) {
-        console.log(session);
-        user.getUserAttributes(function (err, result) {
-            if (err) {
-                alert(err.message || JSON.stringify(err));
-                return;
-            }
-            for (let i = 0; i < result.length; i++) {
-                console.log('attribute ' + result[i].getName() + ' has value ' + result[i].getValue());
-            }
-        });
-    });
-};
-
 export default {
     login,
     signup,
     logout,
     getUsername,
-    disableUser
+    disableUser,
+    enableUser
 }

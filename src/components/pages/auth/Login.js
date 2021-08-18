@@ -22,6 +22,14 @@ const Login = () => {
                     }}>
                 Check
             </Button>
+            <Button variant="contained" color="primary"
+                    onClick={() => AuthService.disableUser('test10')}>
+                Disable user
+            </Button>
+            <Button variant="contained" color="primary"
+                    onClick={() => AuthService.enableUser('test10')}>
+                Enable user
+            </Button>
         </>
     );
 }

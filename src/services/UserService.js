@@ -17,12 +17,13 @@ const getUserById = (id) => {
 
 const getUserIdByUsername = () => {
     const username = AuthService.getUsername();
-    console.log("test", username);
     return axios.post(USER_URL + "users/" + 'userId/', {username: username});
 }
+
+
 
 export default {
     getAllUsers,
     getUserById,
-    getUserIdByUsername
+    getUserIdByUsername,
 }

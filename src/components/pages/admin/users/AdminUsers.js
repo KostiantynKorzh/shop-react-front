@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import AdminService from "../../../../services/AdminService";
 import AdminDefaultLayout from "../../layouts/AdminDefaultLayout";
 import GenericTable from "../common/GenericTable";
+import AdminUserService from "../../../../services/admin/AdminUserService";
 
 const AdminUsers = () => {
     const users = useSelector(state => state.adminUserReducer.adminUsers);
@@ -11,12 +11,12 @@ const AdminUsers = () => {
 
 
     useEffect(() => {
-        dispatch(AdminService.getAllUsers());
+        dispatch(AdminUserService.getAllUsers());
     }, [dispatch])
 
-    useEffect(()=>{
+    useEffect(() => {
         console.log(users)
-    },[])
+    }, [])
 
     const columns = [
         {id: 'id', label: 'ID', maxWidth: 30},
@@ -27,7 +27,8 @@ const AdminUsers = () => {
     return (
         <>
             <AdminDefaultLayout>
-                <GenericTable columns={columns} data={users} deleteObjectFunc={AdminService.deleteUser} type={"USERS"}/>
+                <GenericTable columns={columns} data={users} deleteObjectFunc={AdminUserService.deleteUser}
+                              type={"USERS"}/>
             </AdminDefaultLayout>
         </>
     );

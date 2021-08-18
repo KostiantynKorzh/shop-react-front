@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField} from "@material-ui/core";
 import {useDispatch} from "react-redux";
-import AdminService from "../../../../services/AdminService";
+import AdminCatalogueService from "../../../../services/admin/AdminCatalogueService";
 
 const ItemForm = ({open, setOpen, item}) => {
 
@@ -62,9 +62,9 @@ const ItemForm = ({open, setOpen, item}) => {
                     <Button variant="contained" color="primary"
                             onClick={() => {
                                 if (item) {
-                                    dispatch(AdminService.updateItem(item.id, newTitle, newPrice, newImage));
+                                    dispatch(AdminCatalogueService.updateItem(item.id, newTitle, newPrice, newImage));
                                 } else {
-                                    dispatch(AdminService.createNewItem(newTitle, newPrice, newImage));
+                                    dispatch(AdminCatalogueService.createNewItem(newTitle, newPrice, newImage));
                                 }
                                 setNewTitle('');
                                 setNewPrice('');
