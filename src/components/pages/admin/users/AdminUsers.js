@@ -9,14 +9,9 @@ const AdminUsers = () => {
 
     const dispatch = useDispatch();
 
-
     useEffect(() => {
         dispatch(AdminUserService.getAllUsers());
     }, [dispatch])
-
-    useEffect(() => {
-        console.log(users)
-    }, [])
 
     const columns = [
         {id: 'id', label: 'ID', maxWidth: 30},

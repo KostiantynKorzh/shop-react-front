@@ -73,7 +73,7 @@ const GenericTable = ({columns, data, deleteObjectFunc, type}) => {
                                         <Button
                                             variant={"contained"}
                                             color={"secondary"}
-                                            onClick={() => deleteObjectFunc(data.pk)}
+                                            onClick={() => deleteObjectFunc(data.id)}
                                         >
                                             Delete
                                         </Button>

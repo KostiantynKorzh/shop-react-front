@@ -126,11 +126,46 @@ const logout = () => dispatch => {
 };
 
 const getUsername = () => {
+    let username;
     if (UserPool.getCurrentUser() != null) {
-        return UserPool.getCurrentUser().getUsername();
+        username = UserPool.getCurrentUser().getUsername();
     }
-    return null;
+
+    const params = {
+        Username: username,
+        UserPoolId: USER_POOL_ID
+    }
+
+    cognitoIdentityServiceProvider.adminGetUser(params, function (err, data) {
+        if (err) console.log(err, err.stack); // an error occurred
+        else console.log(data);           // successful response
+    })
 };
+
+// ----- can't update username so useless ----------
+// const updateUser = (username, newUsername) => {
+//     const params = {
+//         UserPoolId: USER_POOL_ID,
+//         Username: username,
+//         UserAttributes: [
+//             {
+//                 Name: "Username",
+//                 Value: newUsername
+//             }
+//         ]
+//     };
+//
+//     cognitoIdentityServiceProvider.adminUpdateUserAttributes({
+//         params,
+//         function(err, result) {
+//             if (err) {
+//                 alert(err.message || JSON.stringify(err));
+//                 return;
+//             }
+//             console.log('call result: ' + result);
+//         }
+//     });
+// };
 
 export default {
     login,
@@ -138,5 +173,5 @@ export default {
     logout,
     getUsername,
     disableUser,
-    enableUser
+    enableUser,
 }

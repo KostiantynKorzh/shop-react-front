@@ -9,10 +9,7 @@ const AdminCatalogue = () => {
 
     const adminItems = useSelector(state => state.adminItemReducer.adminItems);
 
-    const dispatch = useDispatch();
-
     useCollectionFromStore(adminItems, AdminCatalogueService.getAllItems());
-
 
     const columns = [
         {id: 'id', label: 'ID', maxWidth: 30},
@@ -26,7 +23,7 @@ const AdminCatalogue = () => {
     return (
         <>
             <AdminDefaultLayout>
-                <GenericTable columns={columns} data={adminItems} deleteObjectFunc={dispatch(AdminCatalogueService.deleteItem)}
+                <GenericTable columns={columns} data={adminItems} deleteObjectFunc={AdminCatalogueService.deleteItem}
                               type={"ITEMS"}/>
             </AdminDefaultLayout>
         </>

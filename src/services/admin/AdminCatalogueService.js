@@ -18,13 +18,13 @@ const createNewItem = (title, price, imagePath) => dispatch => {
 };
 
 const updateItem = (id, title, price, imagePath) => dispatch => {
-    axios.put(ADMIN_URL + 'items/' + id, {title, price, imagePath})
+    axios.put(ADMIN_URL + 'items/' + id + '/', {title, price, imagePath})
         .then(resp => dispatch(updateAdminItemSuccess(resp.data)))
         .catch(error => dispatch(fetchFailure(error)));
 };
 
 const deleteItem = (id) => {
-    axios.delete(ADMIN_URL + 'items/' + id);
+    axios.delete(ADMIN_URL + 'items/' + id + '/');
 };
 
 export default {

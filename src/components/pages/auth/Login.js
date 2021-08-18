@@ -30,6 +30,10 @@ const Login = () => {
                     onClick={() => AuthService.enableUser('test10')}>
                 Enable user
             </Button>
+            {/*<Button variant="contained" color="primary"*/}
+            {/*        onClick={() => AuthService.updateUser('test10', 'test10_updated')}>*/}
+            {/*    Update username*/}
+            {/*</Button>*/}
         </>
     );
 }
