@@ -16,7 +16,10 @@ const Login = () => {
                 Logout
             </Button>
             <Button variant="contained" color="primary"
-                    onClick={() => AuthService.getUsername()}>
+                    onClick={() => {
+                        console.log(AuthService.getUsername());;
+                        AuthService.disableUser("test10");
+                    }}>
                 Check
             </Button>
         </>
