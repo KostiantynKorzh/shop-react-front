@@ -32,7 +32,7 @@ pipeline {
                 -e REACT_APP_CATALOGUE_URL="http://localhost:8081/" \
                 -e REACT_APP_USER_URL="http://localhost:8082/" \
                 -e REACT_APP_FEEDBACK_URL="http://localhost:2344/" \
-                -e REACT_APP_ADMIN_URL="https://nothing-store.com:8000/" \
+                -e REACT_APP_ADMIN_URL="https://www.nothing-store.com:8000/" \
                 -e REACT_APP_ORDER_URL="http://localhost:1313/" \
                  kostiakorzh/demoshop-front-dev'
             }
